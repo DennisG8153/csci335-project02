@@ -148,6 +148,3 @@ def dijkstra(draw, grid, start, end):
             current.make_closed()
 
     return False
-
-
-# Greedy Strategies

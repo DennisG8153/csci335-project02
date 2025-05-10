@@ -46,7 +46,7 @@ def get_clicked_pos(pos, rows, width):
 
 
 def program(win, width, algo="astar"):
-    """Visualization program which updates based on algorithm outcome"""
+    """Visualization program which updates based on obstacles and path finding algorithm outcome."""
     ROWS = 50
     grid = make_grid(ROWS, width)
     start = None
