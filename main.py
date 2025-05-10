@@ -3,7 +3,7 @@ import pygame
 from models import Pointer
 from util import GREY, WHITE, dijkstra, astar
 
-pygame.display.set_caption("Path Finding Visualizer")
+
 
 
 def make_grid(rows, width):
@@ -130,4 +130,5 @@ if __name__ == "__main__":
         """
         )
     input("Press enter to open the visualizer.")
+    pygame.display.set_caption(f"{selection} Path Finding Visualizer")
     program(pygame.display.set_mode((700, 700)), 700, selection)
