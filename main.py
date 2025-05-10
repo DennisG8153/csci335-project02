@@ -4,8 +4,6 @@ from models import Pointer
 from util import GREY, WHITE, dijkstra, astar
 
 
-
-
 def make_grid(rows, width):
     grid = []
     gap = width // rows
