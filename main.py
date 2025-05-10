@@ -132,4 +132,4 @@ if __name__ == "__main__":
         """
         )
     input("Press enter to open the visualizer.")
-    program(pygame.display.set_mode((500, 500)), 500, selection)
+    program(pygame.display.set_mode((700, 700)), 700, selection)
