@@ -3,7 +3,7 @@ import pygame
 from models import Pointer
 from util import GREY, WHITE, dijkstra, astar
 
-WIDTH = 700
+
 
 pygame.display.set_caption("Path Finding Visualizer")
 
@@ -132,5 +132,4 @@ if __name__ == "__main__":
         """
         )
     input("Press enter to open the visualizer.")
-    WIN = pygame.display.set_mode((WIDTH, WIDTH))
-    program(WIN, WIDTH, selection)
+    program(pygame.display.set_mode((500, 500)), 500, selection)
