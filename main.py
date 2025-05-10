@@ -96,10 +96,9 @@ def program(win, width, algo="astar"):
 
 if __name__ == "__main__":
     print("Path finding by Nicholas Stewart, Dennis Grigoryev, and Alisha Karim.")
-    print(
-        "Welcome to our pathfinding visualization project. Simply draw maze barriers and then press enter to run "
-        "the visualization."
-    )
+    print("----------------------------------------------------------------------")
+    print("Welcome to our pathfinding visualization project. ")
+    print("First, click two nodes to set the start and end points. Then draw the maze and press Enter to run the pathfinding algorithm.")
     selection = input("Please input a* or dijkstra: ")
     if selection == "a*":
         print(
