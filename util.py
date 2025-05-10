@@ -64,11 +64,15 @@ def astar(draw, grid, start, end):
             end.make_end()
             return True
         for neighbor in current.neighbors:
-            g_score_pointer = g_score[current] + 1  # Assumes all edges have a weight of 1
+            g_score_pointer = (
+                g_score[current] + 1
+            )  # Assumes all edges have a weight of 1
             if g_score_pointer < g_score[neighbor]:
                 came_from[neighbor] = current
                 g_score[neighbor] = g_score_pointer
-                f_score[neighbor] = g_score_pointer + h(neighbor.get_pos(), end.get_pos())
+                f_score[neighbor] = g_score_pointer + h(
+                    neighbor.get_pos(), end.get_pos()
+                )
                 if neighbor not in open_set_hash:
                     count += 1
                     open_set.put((f_score[neighbor], count, neighbor))
