@@ -3,8 +3,6 @@ import pygame
 from models import Pointer
 from util import GREY, WHITE, dijkstra, astar
 
-
-
 pygame.display.set_caption("Path Finding Visualizer")
 
 
@@ -105,7 +103,7 @@ if __name__ == "__main__":
     selection = input("Please input a* or dijkstra: ")
     if selection == "a*":
         print(
-        """
+            """
         A* (A-star) is a pathfinding algorithm that efficiently finds the shortest path between two points by 
         combining the actual distance from the start and an estimated distance to the goal. It uses a heuristic to
         guide its search, making it faster and more optimal than simpler algorithms like Dijkstra's in many cases.
@@ -119,7 +117,7 @@ if __name__ == "__main__":
         )
     else:
         print(
-        """
+            """
         Dijkstra's algorithm finds the shortest path from a starting node to all other nodes in a weighted graph 
         with non-negative edge weights. It uses a priority queue to always expand the node with the smallest known 
         distance, updating paths efficiently as it goes.
