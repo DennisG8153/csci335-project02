@@ -1,0 +1,127 @@
+import pygame
+
+from models import Pointer
+from util import GREY, WHITE, dijkstra, astar
+
+WIDTH = 700
+WIN = pygame.display.set_mode((WIDTH, WIDTH))
+pygame.display.set_caption("Path Finding Visualizer")
+
+
+def make_grid(rows, width):
+    grid = []
+    gap = width // rows
+    for i in range(rows):
+        grid.append([])
+        for j in range(rows):
+            spot = Pointer(i, j, gap, rows)
+            grid[i].append(spot)
+
+    return grid
+
+
+def draw_grid(win, rows, width):
+    gap = width // rows
+    for i in range(rows):
+        pygame.draw.line(win, GREY, (0, i * gap), (width, i * gap))
+        for j in range(rows):
+            pygame.draw.line(win, GREY, (j * gap, 0), (j * gap, width))
+
+
+def draw(win, grid, rows, width):
+    win.fill(WHITE)
+    for row in grid:
+        for spot in row:
+            spot.draw(win)
+    draw_grid(win, rows, width)
+    pygame.display.update()
+
+
+def get_clicked_pos(pos, rows, width):
+    gap = width // rows
+    y, x = pos
+    row = y // gap
+    col = x // gap
+    return row, col
+
+
+def program(win, width, algo="astar"):
+    """Visualization program which updates based on algorithm outcome"""
+    ROWS = 50
+    grid = make_grid(ROWS, width)
+    start = None
+    end = None
+    run = True
+    while run:
+        draw(win, grid, ROWS, width)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                run = False
+            if pygame.mouse.get_pressed()[0]:  # LEFT
+                pos = pygame.mouse.get_pos()
+                row, col = get_clicked_pos(pos, ROWS, width)
+                spot = grid[row][col]
+                if not start and spot != end:
+                    start = spot
+                    start.make_start()
+                elif not end and spot != start:
+                    end = spot
+                    end.make_end()
+                elif spot != end and spot != start:
+                    spot.make_barrier()
+            elif pygame.mouse.get_pressed()[2]:  # RIGHT
+                pos = pygame.mouse.get_pos()
+                row, col = get_clicked_pos(pos, ROWS, width)
+                spot = grid[row][col]
+                spot.reset()
+                if spot == start:
+                    start = None
+                elif spot == end:
+                    end = None
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN and start and end:
+                    for row in grid:
+                        for spot in row:
+                            spot.update_neighbors(grid)
+                    if algo == "a*":
+                        astar(lambda: draw(win, grid, ROWS, width), grid, start, end)
+                    else:
+                        dijkstra(lambda: draw(win, grid, ROWS, width), grid, start, end)
+                if event.key == pygame.K_c:
+                    start = None
+                    end = None
+                    grid = make_grid(ROWS, width)
+    pygame.quit()
+
+
+if __name__ == "__main__":
+    print("Path finding by Nicholas Stewart, Dennis Grigoryev, and Alisha Karim.")
+    print("Welcome to our pathfinding visualization project. Simply draw maze barriers and then press enter to run "
+          "the visualization.")
+    selection = input("Please input a* or dijkstra: ")
+    if selection == "a*":
+        print("""
+            A* (A-star) is a pathfinding algorithm that efficiently finds the shortest path between two points by 
+            combining the actual distance from the start and an estimated distance to the goal. It uses a heuristic to
+            guide its search, making it faster and more optimal than simpler algorithms like Dijkstra's in many cases.
+            
+            - What is it's input size: Number of nodes in a graph, can be referenced as barriers in a maze.
+            - What is the basic operation: The basic operation is removing the node with the lowest f(n) = g(n) + h(n) from the priority queue.
+            - Does the basic operation depend only on n: It depends on the structure of the graph (e.g. obstructions in maze) and the heuristic function used.
+            - Summation to count number of operations: sum(n, i=1) log i.
+            - Find the closed-form formula or order of growth.: Time complexity in worst case is O(n log n).
+        """)
+    else:
+        print("""
+            Dijkstra's algorithm finds the shortest path from a starting node to all other nodes in a weighted graph 
+            with non-negative edge weights. It uses a priority queue to always expand the node with the smallest known 
+            distance, updating paths efficiently as it goes.
+
+            - What is it's input size: Number of nodes as well as the number of edges.
+            - What is the basic operation: Extracting the minimum-distance node from the priority queue.
+            - Does the basic operation depend only on n: It depends on n and m, but these two values directly effect outcome unlike with a* where heuristic function matters.
+            - Summation to count number of operations: sum(n, i = 1) log i + sum(m , j=1) log n
+            - Find the closed-form formula or order of growth.: Time complexity is O((n + m) log n)
+        """)
+    input("Press enter to open the visualizer.")
+    program(WIN, WIDTH, selection)
