@@ -4,7 +4,7 @@ from util import WHITE, RED, GREEN, BLACK, ORANGE, TURQUOISE, PURPLE
 
 
 class Pointer:
-    """Used to keep track of path finding algorithm visually."""
+    """Used to keep track of changes in nodes visually."""
 
     def __init__(self, row, col, width, total_rows):
         self.row = row
