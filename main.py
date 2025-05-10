@@ -4,7 +4,7 @@ from models import Pointer
 from util import GREY, WHITE, dijkstra, astar
 
 WIDTH = 700
-WIN = pygame.display.set_mode((WIDTH, WIDTH))
+
 pygame.display.set_caption("Path Finding Visualizer")
 
 
@@ -96,32 +96,39 @@ def program(win, width, algo="astar"):
 
 if __name__ == "__main__":
     print("Path finding by Nicholas Stewart, Dennis Grigoryev, and Alisha Karim.")
-    print("Welcome to our pathfinding visualization project. Simply draw maze barriers and then press enter to run "
-          "the visualization.")
+    print(
+        "Welcome to our pathfinding visualization project. Simply draw maze barriers and then press enter to run "
+        "the visualization."
+    )
     selection = input("Please input a* or dijkstra: ")
     if selection == "a*":
-        print("""
-            A* (A-star) is a pathfinding algorithm that efficiently finds the shortest path between two points by 
-            combining the actual distance from the start and an estimated distance to the goal. It uses a heuristic to
-            guide its search, making it faster and more optimal than simpler algorithms like Dijkstra's in many cases.
-            
-            - What is it's input size: Number of nodes in a graph, can be referenced as barriers in a maze.
-            - What is the basic operation: The basic operation is removing the node with the lowest f(n) = g(n) + h(n) from the priority queue.
-            - Does the basic operation depend only on n: It depends on the structure of the graph (e.g. obstructions in maze) and the heuristic function used.
-            - Summation to count number of operations: sum(n, i=1) log i.
-            - Find the closed-form formula or order of growth.: Time complexity in worst case is O(n log n).
-        """)
+        print(
+            """
+        A* (A-star) is a pathfinding algorithm that efficiently finds the shortest path between two points by 
+        combining the actual distance from the start and an estimated distance to the goal. It uses a heuristic to
+        guide its search, making it faster and more optimal than simpler algorithms like Dijkstra's in many cases.
+        
+        - What is it's input size: Number of nodes in a graph, can be referenced as barriers in a maze.
+        - What is the basic operation: The basic operation is removing the node with the lowest f(n) = g(n) + h(n) from the priority queue.
+        - Does the basic operation depend only on n: It depends on the structure of the graph (e.g. obstructions in maze) and the heuristic function used.
+        - Summation to count number of operations: sum(n, i=1) log i.
+        - Find the closed-form formula or order of growth.: Time complexity in worst case is O(n log n).
+        """
+        )
     else:
-        print("""
-            Dijkstra's algorithm finds the shortest path from a starting node to all other nodes in a weighted graph 
-            with non-negative edge weights. It uses a priority queue to always expand the node with the smallest known 
-            distance, updating paths efficiently as it goes.
+        print(
+            """
+        Dijkstra's algorithm finds the shortest path from a starting node to all other nodes in a weighted graph 
+        with non-negative edge weights. It uses a priority queue to always expand the node with the smallest known 
+        distance, updating paths efficiently as it goes.
 
-            - What is it's input size: Number of nodes as well as the number of edges.
-            - What is the basic operation: Extracting the minimum-distance node from the priority queue.
-            - Does the basic operation depend only on n: It depends on n and m, but these two values directly effect outcome unlike with a* where heuristic function matters.
-            - Summation to count number of operations: sum(n, i = 1) log i + sum(m , j=1) log n
-            - Find the closed-form formula or order of growth.: Time complexity is O((n + m) log n)
-        """)
+        - What is it's input size: Number of nodes as well as the number of edges.
+        - What is the basic operation: Extracting the minimum-distance node from the priority queue.
+        - Does the basic operation depend only on n: It depends on n and m, but these two values directly effect outcome unlike with a* where heuristic function matters.
+        - Summation to count number of operations: sum(n, i = 1) log i + sum(m , j=1) log n
+        - Find the closed-form formula or order of growth.: Time complexity is O((n + m) log n)
+        """
+        )
     input("Press enter to open the visualizer.")
+    WIN = pygame.display.set_mode((WIDTH, WIDTH))
     program(WIN, WIDTH, selection)

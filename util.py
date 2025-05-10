@@ -52,7 +52,9 @@ def astar(draw, grid, start, end):
     g_score[start] = 0  # Distance from start to start is 0
 
     f_score = {spot: float("inf") for row in grid for spot in row}
-    f_score[start] = h(start.get_pos(), end.get_pos())  # Estimated cost from start to end
+    f_score[start] = h(
+        start.get_pos(), end.get_pos()
+    )  # Estimated cost from start to end
 
     open_set_hash = {start}  # A set to quickly check if a node is in the open set
 
@@ -146,5 +148,6 @@ def dijkstra(draw, grid, start, end):
             current.make_closed()
 
     return False
+
 
 # Greedy Strategies
