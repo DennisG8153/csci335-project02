@@ -144,6 +144,5 @@ if __name__ == "__main__":
         - Find the closed-form formula or order of growth.: Time complexity is O((n + m) log n)
         """
         )
-    input("Press enter to open the visualizer.")
     pygame.display.set_caption(f"{selection} Path Finding Visualizer")
     program(pygame.display.set_mode((700, 700)), 700, selection)
