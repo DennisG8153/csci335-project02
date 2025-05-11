@@ -53,7 +53,7 @@ def program(win, width, algo="astar"):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
-            if pygame.mouse.get_pressed()[0]:  # LEFT
+            if pygame.mouse.get_pressed()[0]:
                 pos = pygame.mouse.get_pos()
                 row, col = get_clicked_pos(pos, ROWS, width)
                 try:
@@ -68,7 +68,7 @@ def program(win, width, algo="astar"):
                         spot.make_barrier()
                 except IndexError:
                     pass
-            elif pygame.mouse.get_pressed()[2]:  # RIGHT
+            elif pygame.mouse.get_pressed()[2]:
                 pos = pygame.mouse.get_pos()
                 row, col = get_clicked_pos(pos, ROWS, width)
                 spot = grid[row][col]
