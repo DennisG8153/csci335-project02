@@ -3,8 +3,6 @@ import pygame
 from models import Pointer
 from util import GREY, WHITE, dijkstra, astar, bfsearch
 
-pygame.display.set_caption("Path Finding Visualizer")
-
 
 def make_grid(rows, width):
     grid = []
@@ -55,19 +53,22 @@ def program(win, width, algo="astar"):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
-            if pygame.mouse.get_pressed()[0]:  # LEFT
+            if pygame.mouse.get_pressed()[0]:
                 pos = pygame.mouse.get_pos()
                 row, col = get_clicked_pos(pos, ROWS, width)
-                spot = grid[row][col]
-                if not start and spot != end:
-                    start = spot
-                    start.make_start()
-                elif not end and spot != start:
-                    end = spot
-                    end.make_end()
-                elif spot != end and spot != start:
-                    spot.make_barrier()
-            elif pygame.mouse.get_pressed()[2]:  # RIGHT
+                try:
+                    spot = grid[row][col]
+                    if not start and spot != end:
+                        start = spot
+                        start.make_start()
+                    elif not end and spot != start:
+                        end = spot
+                        end.make_end()
+                    elif spot != end and spot != start:
+                        spot.make_barrier()
+                except IndexError:
+                    pass
+            elif pygame.mouse.get_pressed()[2]:
                 pos = pygame.mouse.get_pos()
                 row, col = get_clicked_pos(pos, ROWS, width)
                 spot = grid[row][col]
@@ -84,7 +85,7 @@ def program(win, width, algo="astar"):
                     if algo == "a*":
                         astar(lambda: draw(win, grid, ROWS, width), grid, start, end)
                     elif algo == "bfs":
-                        bfsearch(lambda: draw(win, grid, ROWS, width), grid, start, end)
+                        bfsearch(lambda: draw(win, grid, ROWS, width), start, end)
                     else:
                         dijkstra(lambda: draw(win, grid, ROWS, width), grid, start, end)
                 if event.key == pygame.K_c:
@@ -102,7 +103,7 @@ if __name__ == "__main__":
         "First, click two nodes to set the start and end points. Then draw the maze and press Enter to run the "
         "pathfinding algorithm."
     )
-    selection = input("Please input a* , bfs or dijkstra: ")
+    selection = input("Please input a*, bfs or dijkstra: ")
     if selection == "a*":
         print(
             """
@@ -143,5 +144,5 @@ if __name__ == "__main__":
         - Find the closed-form formula or order of growth.: Time complexity is O((n + m) log n)
         """
         )
-    input("Press enter to open the visualizer.")
+    pygame.display.set_caption(f"{selection} Path Finding Visualizer")
     program(pygame.display.set_mode((700, 700)), 700, selection)

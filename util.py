@@ -149,14 +149,16 @@ def dijkstra(draw, grid, start, end):
 
     return False
 
-def bfsearch(draw, grid, start, end):
-    """ Implements the Breadth-First Search (BFS) algorithm.
+
+def bfsearch(draw,  start, end):
+    """Implements the Breadth-First Search (BFS) algorithm.
+
     Parameters:
     - draw: A callback function used to update the visualization at each step.
-    - grid: 2D list representing the grid of nodes.
     - start: The starting node.
     - end: The goal node.
     Returns:
+
     - True if a path is found, False otherwise.
     """
     queue = []
@@ -164,29 +166,23 @@ def bfsearch(draw, grid, start, end):
     visited = set()
     visited.add(start)
     came_from = {}
-    found = False
     while queue:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
-
         current = queue.pop(0)
-
         if current == end:
             reconstruct_path(came_from, end, draw)
             end.make_end()
             return True
             break
-
         for neighbor in current.neighbors:
             if neighbor not in visited and not neighbor.is_barrier():
                 visited.add(neighbor)
                 queue.append(neighbor)
                 came_from[neighbor] = current
                 neighbor.make_open()
-
         draw()
-
         if current != start:
             current.make_closed()
     return False
