@@ -125,7 +125,7 @@ if __name__ == "__main__":
         - What is it's input size: Number of nodes in a graph, can be referenced as barriers in a maze.
         - What is the basic operation: The basic operation is adding nodes to the queue and removing them for exploration.
         - Does the basic operation depend only on input size?: Since BFS depends on the structure of the graph (e.g. obstructions in maze), it does as the number of nodes and edges directly affect the outcome.
-        - Summation to count number of operations: sum(n, i=1) + sum(m, j=1).
+        - Summation to count number of operations: sum(n, i=1) 1 + sum(m, j=1) 1 .
         - Find the closed-form formula or order of growth.: Time complexity is O(n + m) where n is the number of nodes and m is the number of edges.
         """
         )
