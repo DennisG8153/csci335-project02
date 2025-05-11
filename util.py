@@ -149,8 +149,9 @@ def dijkstra(draw, grid, start, end):
 
     return False
 
+
 def bfsearch(draw, grid, start, end):
-    """ Implements the Breadth-First Search (BFS) algorithm.
+    """Implements the Breadth-First Search (BFS) algorithm.
     Parameters:
     - draw: A callback function used to update the visualization at each step.
     - grid: 2D list representing the grid of nodes.
