@@ -103,7 +103,7 @@ if __name__ == "__main__":
         "First, click two nodes to set the start and end points. Then draw the maze and press Enter to run the "
         "pathfinding algorithm."
     )
-    selection = input("Please input a* , bfs or dijkstra: ")
+    selection = input("Please input a*, bfs or dijkstra: ")
     if selection == "a*":
         print(
             """
