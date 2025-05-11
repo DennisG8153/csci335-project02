@@ -1,7 +1,7 @@
 import pygame
 
 from models import Pointer
-from util import GREY, WHITE, dijkstra, astar
+from util import GREY, WHITE, dijkstra, astar, bfsearch
 
 pygame.display.set_caption("Path Finding Visualizer")
 
@@ -83,6 +83,8 @@ def program(win, width, algo="astar"):
                             spot.update_neighbors(grid)
                     if algo == "a*":
                         astar(lambda: draw(win, grid, ROWS, width), grid, start, end)
+                    elif algo == "bfs":
+                        bfsearch(lambda: draw(win, grid, ROWS, width), grid, start, end)
                     else:
                         dijkstra(lambda: draw(win, grid, ROWS, width), grid, start, end)
                 if event.key == pygame.K_c:
@@ -100,7 +102,7 @@ if __name__ == "__main__":
         "First, click two nodes to set the start and end points. Then draw the maze and press Enter to run the "
         "pathfinding algorithm."
     )
-    selection = input("Please input a* or dijkstra: ")
+    selection = input("Please input a* , bfs or dijkstra: ")
     if selection == "a*":
         print(
             """
@@ -113,6 +115,18 @@ if __name__ == "__main__":
         - Does the basic operation depend only on n: It depends on the structure of the graph (e.g. obstructions in maze) and the heuristic function used.
         - Summation to count number of operations: sum(n, i=1) log i.
         - Find the closed-form formula or order of growth.: Time complexity in worst case is O(n log n).
+        """
+        )
+    elif selection == "bfs":
+        print(
+            """ 
+        Breadth-First Search (BFS) is a graph traversal algorithm that explores all neighbors at the present depth before moving on to nodes at the next depth level.
+        It is optimal for unweighted graphs, as it guarantees the shortest path in terms of the number of edges.
+        - What is it's input size: Number of nodes in a graph, can be referenced as barriers in a maze.
+        - What is the basic operation: The basic operation is adding nodes to the queue and removing them for exploration.
+        - Does the basic operation depend only on n: It depends on the structure of the graph (e.g. obstructions in maze)? : Yes as the number of nodes and edges directly affect the traversal.
+        - Summation to count number of operations: sum(n, i=1) + sum(m, j=1).
+        - Find the closed-form formula or order of growth.: Time complexity is O(n + m) where n is the number of nodes and m is the number of edges.
         """
         )
     else:
