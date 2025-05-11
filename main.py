@@ -85,7 +85,7 @@ def program(win, width, algo="astar"):
                     if algo == "a*":
                         astar(lambda: draw(win, grid, ROWS, width), grid, start, end)
                     elif algo == "bfs":
-                        bfsearch(lambda: draw(win, grid, ROWS, width), grid, start, end)
+                        bfsearch(lambda: draw(win, grid, ROWS, width), start, end)
                     else:
                         dijkstra(lambda: draw(win, grid, ROWS, width), grid, start, end)
                 if event.key == pygame.K_c:
